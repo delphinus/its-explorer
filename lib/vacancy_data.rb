@@ -1,7 +1,11 @@
 require 'digest/sha2'
 require 'tempfile'
 
+require './lib/util'
+
 class VacancyData
+  include Util
+
   def self.from_json(json)
     parsed = JSON.parse json
     date = begin
@@ -17,6 +21,7 @@ class VacancyData
   end
 
   def initialize(date: Time.now, vacancies: {})
+    raise 'cannot execute `diff`' unless command? 'diff'
     @date = date
     @vacancies = vacancies
   end

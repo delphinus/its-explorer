@@ -1,8 +1,11 @@
 require 'capybara/poltergeist'
-require 'mkmf'
 require 'uri'
 
+require './lib/util'
+
 class Scraper
+  include Util
+
   HOTEL_NAME = %w[
     トスラブ箱根ビオーレ
     トスラブ箱根和奏林
@@ -12,8 +15,7 @@ class Scraper
 
   def initialize(log:)
     @log = log
-
-    raise 'cannot find phantomjs' unless find_executable 'phantomjs'
+    raise 'cannot find phantomjs' unless command? 'phantomjs'
   end
 
   def setup
