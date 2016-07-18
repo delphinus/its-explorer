@@ -5,6 +5,7 @@ require 'pathname'
 
 require './lib/scraper'
 require './lib/vacancy_data'
+require './lib/vacancy_mail'
 
 class App
   SAVE_FILE_NAME = Pathname(__FILE__).expand_path.parent + 'data.json'
@@ -29,13 +30,15 @@ class App
 
     if previous_result != new_result
       write_data new_result.to_json
-      print <<EOF
+      @log.debug 'mail sending...'
+      VacancyMail.send <<EOF
 data changed
 before: #{previous_result.to_digest}
 after:  #{new_result.to_digest}
 
 #{new_result.diff_from previous_result}
 EOF
+      @log.debug 'finish!'
     end
   end
 
