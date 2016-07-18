@@ -2,6 +2,7 @@
 source 'https://rubygems.org'
 
 gem 'capybara'
+gem 'mail-iso-2022-jp'
 gem 'poltergeist'
 gem 'nokogiri'
 
