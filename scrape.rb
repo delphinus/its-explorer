@@ -21,11 +21,11 @@ class App
                  end
     @scraper = Scraper.new log: @log
     @scraper.setup
+    @scraper.start
   end
 
   def start
     previous_result = VacancyData.from_json read_data
-    @scraper.start
     new_result = VacancyData.from_hash @scraper.fetch_vacancies
 
     if previous_result != new_result
