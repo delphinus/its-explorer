@@ -1,4 +1,5 @@
 require 'capybara/poltergeist'
+require 'mkmf'
 require 'uri'
 
 class Scraper
@@ -11,6 +12,8 @@ class Scraper
 
   def initialize(log:)
     @log = log
+
+    raise 'cannot find phantomjs' unless find_executable 'phantomjs'
   end
 
   def setup
