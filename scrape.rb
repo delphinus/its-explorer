@@ -13,10 +13,10 @@ class App
   BACKUP_FILE_NAME = Pathname(__FILE__).expand_path.parent + 'data.orig.json'
 
   def initialize
-    params = ARGV.getopts 'v'
+    @params = ARGV.getopts 'nv'
 
     @log = Logger.new STDOUT
-    @log.level = if params['v']
+    @log.level = if @params['v']
                    Logger::DEBUG
                  else
                    Logger::INFO
@@ -33,13 +33,18 @@ class App
     if previous_result != new_result
       write_data new_result.to_json
       @log.debug 'mail sending...'
-      VacancyMail.send <<EOF
+      mail_body = <<EOF
 data changed
 before: #{previous_result.to_digest}
 after:  #{new_result.to_digest}
 
 #{new_result.diff_from previous_result}
 EOF
+      if @params['n']
+        puts mail_body
+      else
+        VacancyMail.send mail_body
+      end
       @log.debug 'finish!'
     end
   end
