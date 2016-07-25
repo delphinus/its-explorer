@@ -79,4 +79,5 @@ Session.vim
 ### private ignore
 
 /data.json
+/data.orig.json
 /.gmail-password

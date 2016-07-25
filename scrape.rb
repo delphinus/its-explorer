@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'fileutils'
 require 'logger'
 require 'optparse'
 require 'pathname'
@@ -9,6 +10,7 @@ require './lib/vacancy_mail'
 
 class App
   SAVE_FILE_NAME = Pathname(__FILE__).expand_path.parent + 'data.json'
+  BACKUP_FILE_NAME = Pathname(__FILE__).expand_path.parent + 'data.orig.json'
 
   def initialize
     params = ARGV.getopts 'v'
@@ -53,6 +55,7 @@ EOF
 
   def write_data(data)
     begin
+      FileUtils.cp SAVE_FILE_NAME, BACKUP_FILE_NAME
       SAVE_FILE_NAME.write data
     rescue => e
       @log.error e
