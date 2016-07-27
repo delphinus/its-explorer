@@ -7,7 +7,8 @@ class VacancyMail
   def self.send(body_content)
     mail = Mail.new charset: 'ISO-2022-JP' do
       from    'delphinus@remora.cx'
-      to      'delphinus@remora.cx'
+      to      'bubupolko@me.com'
+      cc      'delphinus@remora.cx'
       subject "ITS 宿泊施設空き情報（#{Time.now.strftime '%F %T'}）"
       body    body_content
     end
