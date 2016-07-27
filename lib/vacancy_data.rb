@@ -74,6 +74,6 @@ class VacancyData
     previous_file = Tempfile.open 'previous_result'
     previous_file.write previous
     previous_file.close
-    `diff -u #{previous_file.path} #{new_file.path}`.scrub('?').sub /\A.*\n.*\n/, ''
+    `diff -u #{previous_file.path} #{new_file.path}`.force_encoding('UTF-8').scrub('?').sub /\A.*\n.*\n/, ''
   end
 end
