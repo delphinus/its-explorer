@@ -34,9 +34,11 @@ class App
       write_data new_result.to_json
       @log.debug 'mail sending...'
       mail_body = <<EOF
-data changed
-before: #{previous_result.to_digest}
-after:  #{new_result.to_digest}
+最新情報
+
+#{new_result}
+
+差分
 
 #{new_result.diff_from previous_result}
 EOF
