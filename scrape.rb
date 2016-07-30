@@ -34,6 +34,10 @@ class App
       write_data new_result.to_json
       @log.debug 'mail sending...'
       mail_body = <<EOF
+予約ページ
+
+https://as.its-kenpo.or.jp/service_category/index
+
 最新情報
 
 #{new_result}
