@@ -49,7 +49,7 @@ class VacancyData
       else
         vacancies.each do |date|
           date_str = if date.respond_to? 'strftime'
-                       date.strftime '%F'
+                       date.strftime '%F (%a)'
                      else
                        date.to_s
                      end
